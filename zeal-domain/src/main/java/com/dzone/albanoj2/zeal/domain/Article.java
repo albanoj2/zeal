@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * An article published on Zeal.
+ * An article published on Zeal. The comments added to this article must have
+ * unique IDs. If a comment is added and another comment already exists with the
+ * same ID, the comment is rejected.
  * 
  * @author Justin Albano <justin.albano.author@gmail.com>
  *
@@ -23,17 +25,33 @@ public class Article {
 		this.comments = new ArrayList<>();
 	}
 
+	/**
+	 * Creates a new article.
+	 * 
+	 * @param id
+	 *        The ID of the article.
+	 * @param creationTime
+	 *        The creation time of the article.
+	 * @param title
+	 *        The title of the article.
+	 * @param content
+	 *        The content of the article.
+	 * @param comments
+	 *        The comments associated with the article. If the supplied comments
+	 *        are {@code null}, the comments are set to an empty list.
+	 */
 	public Article(long id, long creationTime, String title, String content,
-			List<Comment> comments) {
+		List<Comment> comments) {
 		this.id = id;
 		this.creationTime = creationTime;
 		this.title = title;
 		this.content = content;
-		this.comments = comments;
+		setComments(comments);
 	}
 
 	/**
-	 * Adds a new comment.
+	 * Adds a new comment. The supplied comment must have a unique ID (i.e.,
+	 * there must not exist a comment with the same ID in this article).
 	 * 
 	 * @param comment
 	 *        The comment to add.
@@ -93,7 +111,24 @@ public class Article {
 		return comments;
 	}
 
+	/**
+	 * Sets the comments for this article.
+	 * 
+	 * @param comments
+	 *        The comments for this article. If the supplied comments are
+	 *        {@code null}, the comments are set to an empty list.
+	 */
 	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+		this.comments = ensureNonNull(comments);
+	}
+
+	private static List<Comment> ensureNonNull(List<Comment> comments) {
+
+		if (comments == null) {
+			return new ArrayList<>();
+		} 
+		else {
+			return comments;
+		}
 	}
 }
