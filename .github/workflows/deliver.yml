@@ -14,13 +14,17 @@ jobs:
           java-version: 11
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean package
+      - name: Stage Reports
+        run: |
+          mkdir -p output/reports/zeal-domain
+          cp -r zeal-domain/target/site/jacoco/ output/reports/zeal-domain
       - name: Upload Distribution Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
           path: zeal-domain/target/zeal-domain-*.jar
-      - name: Upload Domain Reports
+      - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
-          name: zeal-domain-reports
-          path: zeal-domain/target/site/jacoco
+          name: reports
+          path: output/reports
