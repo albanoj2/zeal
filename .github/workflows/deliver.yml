@@ -18,11 +18,15 @@ jobs:
         run: |
           mkdir -p output/reports/zeal-domain
           cp -r zeal-domain/target/site/jacoco/ output/reports/zeal-domain
+          mkdir -p output/reports/zeal-persistence
+          cp -r zeal-persistence/target/site/jacoco/ output/reports/zeal-persistence
       - name: Upload Distribution Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: zeal-domain/target/zeal-domain-*.jar
+          path:
+            - zeal-domain/target/zeal-domain-*.jar
+            - zeal-persistence/target/zeal-persistence-*.jar
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
