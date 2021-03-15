@@ -8,5 +8,6 @@
 
     <modules>
         <module>zeal-domain</module>
+        <module>zeal-persistence</module>
     </modules>
 </project>
