@@ -24,9 +24,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: |
-            zeal-domain/target/zeal-domain-*.jar
-            zeal-persistence/target/zeal-persistence-*.jar
+          path:
+            - zeal-domain/target/zeal-domain-*.jar
+            - zeal-persistence/target/zeal-persistence-*.jar
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
