@@ -38,16 +38,6 @@ public class ArticleTest {
 	}
 	
 	@Test
-	public void givenNullComments_whenFindCommentById_thenNoCommentFound() {
-		
-		Article article = new Article(10L, 100L, "foo", "bar", null);
-		
-		Optional<Comment> found = article.findCommentById(1L);
-		
-		assertFalse(found.isPresent());
-	}
-	
-	@Test
 	public void givenNonMatchingComment_whenFindCommentById_thenNoCommentFound() {
 		
 		Article article = new Article();
