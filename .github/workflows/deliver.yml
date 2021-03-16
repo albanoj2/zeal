@@ -13,20 +13,16 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots clean package
+        run: ./scipts/build.sh
+      - name: Stage Artifacts
+        run: ./scripts/stage-artifacts.sh
       - name: Stage Reports
-        run: |
-          mkdir -p output/reports/zeal-domain
-          cp -r zeal-domain/target/site/jacoco/ output/reports/zeal-domain
-          mkdir -p output/reports/zeal-persistence
-          cp -r zeal-persistence/target/site/jacoco/ output/reports/zeal-persistence
+        run: ./scripts/stage-reports.sh
       - name: Upload Distribution Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: |
-            zeal-domain/target/zeal-domain-*.jar
-            zeal-persistence/target/zeal-persistence-*.jar
+          path: output/artifacts
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
