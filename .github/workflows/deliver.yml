@@ -13,7 +13,7 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: ./scipts/build.sh
+        run: ./scripts/build.sh
       - name: Stage Artifacts
         run: ./scripts/stage-artifacts.sh
       - name: Stage Reports
