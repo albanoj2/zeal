@@ -25,6 +25,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.dzone.albanoj2.zeal</groupId>
+				<artifactId>zeal-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
 				<version>${junit.version}</version>
