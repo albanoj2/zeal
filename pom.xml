@@ -8,7 +8,7 @@
     <artifactId>zeal-parent</artifactId>
     <version>0.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Zeal</name>
+    <name>zeal</name>
     <description>Assertion library for Java</description>
     <url>https://github.com/libzeal/zeal</url>
 
@@ -45,6 +45,12 @@
 
         <sonar.organization>libzeal</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.basedir}/zeal-report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+
+        <junit.version>5.10.3</junit.version>
+        <mockito.version>4.11.0</mockito.version>
 
         <bundle.plugin.version>5.1.9</bundle.plugin.version>
         <gpg.plugin.version>3.2.4</gpg.plugin.version>
@@ -54,24 +60,57 @@
         </central.publishing.plugin.version>
         <release.plugin.version>3.1.0</release.plugin.version>
         <sonar.plugin.version>4.0.0.4121</sonar.plugin.version>
+        <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
+        <deploy.plugin.version>3.1.2</deploy.plugin.version>
     </properties>
 
     <modules>
         <module>zeal-assertion</module>
         <module>zeal-expression</module>
+        <module>zeal-expression-lang</module>
+        <module>zeal-expression-types-core</module>
+        <module>zeal-report-aggregate</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.github.libzeal</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>zeal-assertion</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.libzeal</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>zeal-expression</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>zeal-expression-lang</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>zeal-expression-types-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -124,8 +163,32 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${deploy.plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>

@@ -5,4 +5,4 @@ PROJECT_ROOT=$SCRIPT_DIR/..
 
 cd "$PROJECT_ROOT" || exit 1
 
-mvn -B verify -Psonar "$@"
+mvn -B clean install verify -Psonar "$@"

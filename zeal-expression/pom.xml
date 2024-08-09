@@ -13,6 +13,38 @@
         <version>0.2.0-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.basedir}/../zeal-report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.libzeal</groupId>
+            <artifactId>zeal-expression-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.libzeal</groupId>
+            <artifactId>zeal-expression-types-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -22,15 +54,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            com.zeal.expression,
-                            com.zeal.expression.api.eval,
-                            com.zeal.expression.api.eval.primitive,
-                            com.zeal.expression.api.ops,
-                            com.zeal.expression.eval,
-                            com.zeal.expression.eval.base,
-                            com.zeal.expression.eval.primitive,
-                            com.zeal.expression.ops.logical,
-                            com.zeal.expression.ops.values
+                            io.github.libzeal.zeal.expression
                         </Export-Package>
                     </instructions>
                 </configuration>

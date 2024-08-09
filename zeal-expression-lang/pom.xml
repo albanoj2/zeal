@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zeal-assertion</artifactId>
+    <artifactId>zeal-expression-lang</artifactId>
     <packaging>bundle</packaging>
 
     <parent>
@@ -21,16 +21,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>zeal-expression</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.libzeal</groupId>
-            <artifactId>zeal-expression-lang</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <artifactId>junit-jupiter-params</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -49,12 +46,17 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            io.github.libzeal.zeal.assertion,
-                            io.github.libzeal.zeal.assertion.error
+                            io.github.libzeal.zeal.expression.lang,
+                            io.github.libzeal.zeal.expression.lang.condition,
+                            io.github.libzeal.zeal.expression.lang.evaluation,
+                            io.github.libzeal.zeal.expression.lang.evaluation.format,
+                            io.github.libzeal.zeal.expression.lang.predicate,
+                            io.github.libzeal.zeal.expression.lang.predicate.unary
                         </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>
